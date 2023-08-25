@@ -1,0 +1,7 @@
+{
+    "tailwindCSS.includeLanguages": {
+        "plaintext": "vue"
+    },
+    "tailwindCSS.emmetCompletions": true,
+    "nuxt.isNuxtApp": false
+}

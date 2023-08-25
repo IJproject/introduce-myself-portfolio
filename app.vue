@@ -1,5 +1,9 @@
+<script setup>
+
+</script>
+
 <template>
-  <div>
-    <NuxtWelcome />
-  </div>
+    <div class="bg-slate-900 h-screen w-screen">
+        <NuxtPage />
+    </div>
 </template>
