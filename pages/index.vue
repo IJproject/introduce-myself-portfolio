@@ -1,35 +1,72 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { Scene, PerspectiveCamera, WebGLRenderer, MeshStandardMaterial, Mesh, DirectionalLight } from "three";
+import { Scene, PerspectiveCamera, WebGLRenderer, MeshStandardMaterial, Mesh, DirectionalLight, BoxGeometry } from "three";
 
 // ***THREE.jsの記述はここから***
-const init = () => {
-    const scene = new Scene();
+let scene, frontRenderer, camera, sizes
 
-    const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight,
+const init = () => {
+    scene = new Scene();
+
+    sizes = {
+        width: window.innerWidth,
+        height: window.innerHeight,
     };
 
-    const camera = new PerspectiveCamera(50, sizes.width / sizes.height, 0.1, 100);
-    camera.position.y = 1;
+    camera = new PerspectiveCamera(50, sizes.width / sizes.height, 0.1, 100);
+    camera.position.x = 2;
+    camera.position.y = 2;
     camera.position.z = 5;
     scene.add(camera);
 
-    const frontRenderer = new WebGLRenderer({ alpha: true });
+    frontRenderer = new WebGLRenderer({ alpha: true });
     frontRenderer.setSize(sizes.width, sizes.height);
     frontRenderer.setPixelRatio(window.devicePixelRatio);
+
+    const geometry = new BoxGeometry( 2, 2, 2 ); 
+
+    const material = new MeshStandardMaterial();
+    material.roughness = 0.7
+    material.metalness = 0.7
+
+    const directionalLight = new DirectionalLight("#ffffff", 1)
+    directionalLight.position.set(6, 0, 6)
+    scene.add(directionalLight)
+
+    const mesh = new Mesh(geometry, material);
+
+    mesh.position.set(0, 0, 0)
+    
+    scene.add(mesh)
 }
 
 onMounted(() => {
+    const frontendGL = document.getElementById("frontendGL");
     init();
+    frontendGL.appendChild(frontRenderer.domElement);
+    frontRenderer.render(scene, camera);
+
+    window.addEventListener("resize", () => {
+        sizes.width = window.innerWidth;
+        sizes.height = window.innerHeight;
+
+        camera.aspect = sizes.width / sizes.height;
+        camera.updateProjectionMatrix();
+
+        frontRenderer.setSize(sizes.width, sizes.height);
+        frontRenderer.setPixelRatio(window.devicePixelRatio);
+    });
 })
+
+
 
 </script>
 
 <template>
-    <div class="h-screen flex justify-center items-center">
+    <div class="relative">
         <div id="frontendGL"></div>
-        <NuxtLink to="/home" class="block px-8 py-4 text-4xl text-white font-bold bg-transparent border-y-2 border-white">Enter</NuxtLink>
+        <div class="absolute top-0 left-0 h-screen w-screen flex justify-center items-center">
+            <NuxtLink to="/home" class="block px-8 py-4 text-4xl text-white font-bold bg-transparent border-y-2 border-white">Enter</NuxtLink>
+        </div>
     </div>
 </template>
