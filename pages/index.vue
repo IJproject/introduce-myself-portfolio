@@ -1,10 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { Scene, PerspectiveCamera, WebGLRenderer, MeshNormalMaterial, Mesh, DirectionalLight, OctahedronGeometry } from "three";
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { Scene, PerspectiveCamera, WebGLRenderer, MeshStandardMaterial, Mesh, DirectionalLight, OctahedronGeometry, Color } from "three";
 
 // ***THREE.jsの記述はここから***
-let scene, frontRenderer, camera, sizes
+let scene, objectRenderer, camera, sizes, firstMesh, directionalLight
 
 const init = () => {
     scene = new Scene();
@@ -15,46 +14,42 @@ const init = () => {
     };
 
     camera = new PerspectiveCamera(50, sizes.width / sizes.height, 0.1, 100);
-    camera.position.x = 0;
-    camera.position.y = 5;
+    camera.position.x = 2;
+    camera.position.y = -2;
     camera.position.z = 12;
     camera.lookAt(0, 0, 0);
     scene.add(camera);
 
-    frontRenderer = new WebGLRenderer({ alpha: true });
-    frontRenderer.setSize(sizes.width, sizes.height);
-    frontRenderer.setPixelRatio(window.devicePixelRatio);
+    objectRenderer = new WebGLRenderer({ alpha: true });
+    objectRenderer.setSize(sizes.width, sizes.height);
+    objectRenderer.setPixelRatio(window.devicePixelRatio);
 
     const FristGeometry = new OctahedronGeometry( 5 ); 
 
-    const material = new MeshNormalMaterial();
+    const material = new MeshStandardMaterial();
     material.roughness = 0.7
     material.metalness = 0.7
 
-    const directionalLight = new DirectionalLight("#ffffff", 1)
+    directionalLight = new DirectionalLight("#000000", 4)
     directionalLight.position.set(6, 0, 6)
     scene.add(directionalLight)
 
-    const firstMesh = new Mesh(FristGeometry, material);
+    firstMesh = new Mesh(FristGeometry, material);
+    firstMesh.position.set(0, 0, 0)
 
     scene.add(firstMesh)
 }
 
 onMounted(() => {
-    const frontendGL = document.getElementById("frontendGL");
+    const objectGL = document.getElementById("objectGL");
+
     init();
-    frontendGL.appendChild(frontRenderer.domElement);
-    frontRenderer.render(scene, camera);
-    const controls = new OrbitControls(camera, frontRenderer.domElement);
-    controls.update();
-    animate()
+    
+    objectGL.appendChild(objectRenderer.domElement);
+    objectRenderer.render(scene, camera);
 
-    function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        frontRenderer.render(scene, camera);
-    }
 
+    // リサイズ対応
     window.addEventListener("resize", () => {
         sizes.width = window.innerWidth;
         sizes.height = window.innerHeight;
@@ -62,20 +57,41 @@ onMounted(() => {
         camera.aspect = sizes.width / sizes.height;
         camera.updateProjectionMatrix();
 
-        frontRenderer.setSize(sizes.width, sizes.height);
-        frontRenderer.setPixelRatio(window.devicePixelRatio);
+        objectRenderer.setSize(sizes.width, sizes.height);
+        objectRenderer.setPixelRatio(window.devicePixelRatio);
     });
+
+    // 回転量の取得
+    let deltaX = 0;
+    let deltaY = 0;
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        deltaX += 0.003
+        deltaY += 0.003
+
+        window.addEventListener("wheel", (event) => {
+            deltaX += event.deltaY / 50000
+            deltaY += event.deltaX / 50000
+        });
+
+        firstMesh.rotation.x = -deltaX
+        firstMesh.rotation.y = -deltaY
+
+        directionalLight.color.setRGB(Math.sin(deltaX), Math.sin((deltaX + deltaY) / 2), Math.sin(deltaY))
+
+        objectRenderer.render(scene, camera);
+    }
+
+    animate();
 })
-
-
-
-
 
 </script>
 
 <template>
     <div class="relative">
-        <div id="frontendGL"></div>
+        <div id="objectGL"></div>
         <!-- <div class="absolute top-0 left-0 h-screen w-screen flex justify-center items-center">
             <NuxtLink to="/home" class="block px-8 py-4 text-4xl text-white font-bold bg-transparent border-y-2 border-white">Enter</NuxtLink>
         </div> -->
