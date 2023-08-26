@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { Scene, PerspectiveCamera, WebGLRenderer, MeshNormalMaterial, Mesh, DirectionalLight, TorusGeometry } from "three";
+import { Scene, PerspectiveCamera, WebGLRenderer, MeshNormalMaterial, Mesh, DirectionalLight, OctahedronGeometry } from "three";
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 // ***THREE.jsの記述はここから***
 let scene, frontRenderer, camera, sizes
@@ -24,8 +25,7 @@ const init = () => {
     frontRenderer.setSize(sizes.width, sizes.height);
     frontRenderer.setPixelRatio(window.devicePixelRatio);
 
-    const geometry1 = new TorusGeometry( 3.2, 1, 16, 50, 5.5 ); 
-    const geometry2 = new TorusGeometry( 3.2, 1, 16, 50, 5.5 ); 
+    const FristGeometry = new OctahedronGeometry( 5 ); 
 
     const material = new MeshNormalMaterial();
     material.roughness = 0.7
@@ -35,15 +35,9 @@ const init = () => {
     directionalLight.position.set(6, 0, 6)
     scene.add(directionalLight)
 
-    const mesh1 = new Mesh(geometry1, material);
-    const mesh2 = new Mesh(geometry2, material);
+    const firstMesh = new Mesh(FristGeometry, material);
 
-    mesh1.rotation.x = Math.PI / 2
-
-    mesh1.position.set(1.5, 0, 0)
-    mesh2.position.set(-1.5, 0, 0)
-    
-    scene.add(mesh1, mesh2)
+    scene.add(firstMesh)
 }
 
 onMounted(() => {
@@ -51,6 +45,15 @@ onMounted(() => {
     init();
     frontendGL.appendChild(frontRenderer.domElement);
     frontRenderer.render(scene, camera);
+    const controls = new OrbitControls(camera, frontRenderer.domElement);
+    controls.update();
+    animate()
+
+    function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        frontRenderer.render(scene, camera);
+    }
 
     window.addEventListener("resize", () => {
         sizes.width = window.innerWidth;
@@ -66,13 +69,15 @@ onMounted(() => {
 
 
 
+
+
 </script>
 
 <template>
     <div class="relative">
         <div id="frontendGL"></div>
-        <div class="absolute top-0 left-0 h-screen w-screen flex justify-center items-center">
+        <!-- <div class="absolute top-0 left-0 h-screen w-screen flex justify-center items-center">
             <NuxtLink to="/home" class="block px-8 py-4 text-4xl text-white font-bold bg-transparent border-y-2 border-white">Enter</NuxtLink>
-        </div>
+        </div> -->
     </div>
 </template>
