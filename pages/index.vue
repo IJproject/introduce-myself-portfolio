@@ -76,6 +76,22 @@ onMounted(() => {
             deltaY += event.deltaX / 50000
         });
 
+        // スマートフォン用のタッチイベント
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        window.addEventListener('touchstart', (event) => {
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+        });
+
+        window.addEventListener('touchmove', (event) => {
+            const touchX = event.touches[0].clientX;
+            const touchY = event.touches[0].clientY;
+            deltaX += (touchX - touchStartX) / 30000;
+            deltaY += (touchY - touchStartY) / 30000;
+        });
+
         firstMesh.rotation.x = -deltaX
         firstMesh.rotation.y = -deltaY
 
