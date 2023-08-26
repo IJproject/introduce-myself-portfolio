@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import { Scene, PerspectiveCamera, WebGLRenderer, MeshStandardMaterial, Mesh, DirectionalLight, OctahedronGeometry, Color } from "three";
 
 // ***THREE.jsの記述はここから***
-let scene, objectRenderer, camera, sizes, firstMesh, directionalLight
+let scene, objectRenderer, camera, sizes, geometry, mesh, directionalLight, loader, material
 
 const init = () => {
     scene = new Scene();
@@ -24,9 +24,9 @@ const init = () => {
     objectRenderer.setSize(sizes.width, sizes.height);
     objectRenderer.setPixelRatio(window.devicePixelRatio);
 
-    const FristGeometry = new OctahedronGeometry( 5 ); 
+    geometry = new OctahedronGeometry( 5 ); 
 
-    const material = new MeshStandardMaterial();
+    material = new MeshStandardMaterial();
     material.roughness = 0.7
     material.metalness = 0.7
 
@@ -34,10 +34,10 @@ const init = () => {
     directionalLight.position.set(6, 0, 6)
     scene.add(directionalLight)
 
-    firstMesh = new Mesh(FristGeometry, material);
-    firstMesh.position.set(0, 0, 0)
+    mesh = new Mesh(geometry, material);
+    mesh.position.set(0, 0, 0)
 
-    scene.add(firstMesh)
+    scene.add(mesh)
 }
 
 onMounted(() => {
@@ -64,42 +64,53 @@ onMounted(() => {
     // 回転量の取得
     let deltaX = 0;
     let deltaY = 0;
+    let scaleChange = 1;
 
     function animate() {
         requestAnimationFrame(animate);
 
-        deltaX += 0.003
-        deltaY += 0.003
+        if(scaleChange > 0) {
+            scaleChange -= 0.005
 
-        window.addEventListener("wheel", (event) => {
-            deltaX += event.deltaY / 50000
-            deltaY += event.deltaX / 50000
-        });
+            deltaX += 0.003
+            deltaY += 0.003
 
-        // スマートフォン用のタッチイベント
-        let touchStartX = 0;
-        let touchStartY = 0;
+            window.addEventListener("wheel", (event) => {
+                deltaX += event.deltaY / 50000
+                deltaY += event.deltaX / 50000
+            });
 
-        window.addEventListener('touchstart', (event) => {
-            touchStartX = event.touches[0].clientX;
-            touchStartY = event.touches[0].clientY;
-        });
+            // スマートフォン用のタッチイベント
+            let touchStartX = 0;
+            let touchStartY = 0;
 
-        window.addEventListener('touchmove', (event) => {
-            const touchX = event.touches[0].clientX;
-            const touchY = event.touches[0].clientY;
-            deltaX += (touchY - touchStartY) / 500000;
-            deltaY += (touchX - touchStartX) / 500000;
-        });
+            window.addEventListener('touchstart', (event) => {
+                touchStartX = event.touches[0].clientX;
+                touchStartY = event.touches[0].clientY;
+            });
 
-        firstMesh.rotation.x = -deltaX
-        firstMesh.rotation.y = -deltaY
+            window.addEventListener('touchmove', (event) => {
+                const touchX = event.touches[0].clientX;
+                const touchY = event.touches[0].clientY;
+                deltaX += (touchY - touchStartY) / 400000;
+                deltaY += (touchX - touchStartX) / 400000;
+            });
 
-        directionalLight.color.setRGB(Math.sin(deltaX), Math.sin((deltaX + deltaY) / 2), Math.sin(deltaY))
+            mesh.rotation.x = -deltaX
+            mesh.rotation.y = -deltaY
+
+            mesh.scale.set(scaleChange, scaleChange, scaleChange);  
+
+            directionalLight.color.setRGB(Math.sin(deltaX), Math.sin((deltaX + deltaY) / 2), Math.sin(deltaY))
+        } 
+
+        if(scaleChange <= 0 && scaleChange > -5) {
+            scaleChange = -10;
+            mesh.scale.set(1, 1, 1);  
+        }
 
         objectRenderer.render(scene, camera);
     }
-
     animate();
 })
 
