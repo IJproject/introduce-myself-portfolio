@@ -4,6 +4,6 @@
 
 <template>
     <NuxtLayout>
-        <div>skills/frontend.vueの記述</div>
+        <div>works/index.vueの記述</div>
     </NuxtLayout>
 </template>

@@ -4,8 +4,6 @@
 
 <template>
     <NuxtLayout>
-        <div class="text-white">
-            home.vue
-        </div>
+        <div>contact/index.vueの記述</div>
     </NuxtLayout>
 </template>
