@@ -88,8 +88,8 @@ onMounted(() => {
         window.addEventListener('touchmove', (event) => {
             const touchX = event.touches[0].clientX;
             const touchY = event.touches[0].clientY;
-            deltaX += (touchX - touchStartX) / 30000;
-            deltaY += (touchY - touchStartY) / 30000;
+            deltaX += (touchX - touchStartX) / 100000;
+            deltaY += (touchY - touchStartY) / 100000;
         });
 
         firstMesh.rotation.x = -deltaX
