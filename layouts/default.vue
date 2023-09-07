@@ -1,22 +1,13 @@
 <script setup>
 import { ref } from 'vue'
-import { Dialog, DialogPanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-
-const navigation = [
-  { name: 'Profile', href: '/profile' },
-  { name: 'Skills', href: '/skills' },
-  { name: 'Works', href: '/works' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '/contact' },
-]
 
 const mobileMenuOpen = ref(false)
 // 下にスクロールしたときは隠して、上にスクロールした時に出現させるのもアリ
 </script>
 
 <template>
-    <!-- <header class="w-screen px-16 py-6 flex justify-between  fixed top-0 left-0 z-10" >
+    <!-- <header class="w-screen px-16 py-6 flex justify-between " >
         <NuxtLink to="/home">HOME</NuxtLink>
         <ul class="flex gap-x-12">
             <li><NuxtLink to="/profile">PROFILE</NuxtLink></li>
@@ -25,50 +16,28 @@ const mobileMenuOpen = ref(false)
             <li><NuxtLink to="/contact">CONTACT</NuxtLink></li>
         </ul>
     </header> -->
-    <header class="text-white text-2xl bg-slate-700">
-        <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-            <div class="flex lg:flex-1 ml-4">
-                <a href="#" class="p-1.5">
-                    <span class="sr-only">Your Company</span>
-                    <NuxtLink to="/home">Home</NuxtLink>
-                </a>
+    <header class="text-white text-2xl bg-slate-700 fixed top-0 left-0 z-10 w-screen">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+            <div class="flex lg:flex-1 ml-6">
+                <NuxtLink to="/home">HOME</NuxtLink>
             </div>
-            <div class="flex lg:hidden">
-                <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5" @click="mobileMenuOpen = true">
-                <span class="sr-only">Open main menu</span>
-                <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+            <div class="flex lg:hidden mr-6">
+                <button type="button" class="inline-flex items-center justify-center rounded-md" @click="mobileMenuOpen = true">
+                    <span class="sr-only">Open main menu</span>
+                    <Bars3Icon class="h-8 w-8" aria-hidden="true" />
                 </button>
             </div>
-            <div class="hidden lg:flex lg:gap-x-12">
-                <!-- <a v-for="item in navigation" :key="item.name" :href="item.href" class="leading-6">{{ item.name }}</a> -->
-                <NuxtLink to="/profile">Profile</NuxtLink>
+            <div class="hidden lg:flex lg:gap-x-12 mr-6">
+                <NuxtLink to="/profile">PROFILE</NuxtLink>
+                <NuxtLink to="/skills">SKILLS</NuxtLink>
+                <NuxtLink to="/works">WORKS</NuxtLink>
+                <NuxtLink to="/blog">BLOG</NuxtLink>
+                <NuxtLink to="/contact">CONTACT</NuxtLink>
             </div>
         </nav>
-        <Dialog as="div" class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
-            <div class="fixed inset-0 z-10" />
-            <DialogPanel class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-                <div class="flex items-center justify-between">
-                    <a href="#" class="-m-1.5 p-1.5">
-                        <span class="sr-only">Your Company</span>
-                        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-                    </a>
-                    <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
-                        <span class="sr-only">Close menu</span>
-                        <XMarkIcon class="h-6 w-6" aria-hidden="true" />
-                    </button>
-                </div>
-                <div class="mt-6 flow-root">
-                    <div class="-my-6 divide-y divide-gray-500/10">
-                        <div class="space-y-2 py-6">
-                            <a v-for="item in navigation" :key="item.name" :href="item.href" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{ item.name }}</a>
-                        </div>
-                    </div>
-                </div>
-            </DialogPanel>
-        </Dialog>
     </header>
 
-    <main class="px-8 pt-24">
+    <main class="px-8 pt-24 w-screen overflow-hidden">
         <slot />
     </main>
     

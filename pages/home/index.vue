@@ -5,8 +5,16 @@
 <template>
     <NuxtLayout>
         <div>
-            <div id="homeGL" class="h-screen w-screen">
-                
+            <div id="homeGL" class="h-screen w-full relative">
+                <div class="absolute top-1/4 right-2/3">
+                    <p class="text-5xl">Web Engineer</p>
+                    <p class="text-3xl text-right mt-2">- Junpei Iwata</p>    
+                    <p class="text-lg mt-8">
+                        フルスタックエンジニア(自称)の<br>
+                        自己紹介ポートフォリオへようこそ<br>
+                    </p>
+                </div>
+                <div class="absolute top-3/4 left-1/2 -translate-x-1/2 -tranlate-y-1/2 text-lg p-4 border-y-2 border-white">↓↓ スクロール ↓↓</div>
             </div>
             <hr>
             <div class="my-8 text-center">

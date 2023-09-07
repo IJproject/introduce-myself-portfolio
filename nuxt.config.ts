@@ -5,4 +5,7 @@ export default defineNuxtConfig({
         '@nuxtjs/tailwindcss',
         'nuxt-headlessui',
     ],
+    headlessui: {
+        prefix: 'Headless'
+    },
 })
