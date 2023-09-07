@@ -5,8 +5,8 @@
 <template>
     <NuxtLayout>
         <div>
-            <div>
-                vf
+            <div id="homeGL" class="h-screen w-screen">
+                
             </div>
             <hr>
             <div class="my-8 text-center">
