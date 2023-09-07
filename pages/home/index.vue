@@ -10,7 +10,7 @@
                     <p class="text-5xl">Web Engineer</p>
                     <p class="text-3xl text-right mt-2">- Junpei Iwata</p>    
                     <p class="text-lg mt-8">
-                        フルスタックエンジニア(自称)の<br>
+                        自称フルスタックエンジニアの<br>
                         自己紹介ポートフォリオへようこそ<br>
                     </p>
                 </div>
