@@ -1,40 +1,47 @@
 <script setup>
+const JsTs = [
+    { name: 'JavaScript(Vanilla)', level: 50, imgUrl: '/img/javascript.png', workUrl: '#' },
+    { name: 'TypeScript', level: 30, imgUrl: '/img/typescript.png', workUrl: '#' },
+    { name: 'Vue3', level: 70, imgUrl: '/img/vue.png', workUrl: '#' },
+    { name: 'Nuxt3', level: 50, imgUrl: '/img/nuxt.png', workUrl: '#' },
+    { name: 'React', level: 30, imgUrl: '/img/react.png', workUrl: '#' },
+    { name: 'Next', level: 10, imgUrl: '/img/next.png', workUrl: '#' },
+]
 
+const css = [
+    { name: 'Tailwind', level: 90, imgUrl: '#', workUrl: '#' },
+    { name: 'Bootstrap', level: 80, imgUrl: '#', workUrl: '#' },
+]
 </script>
 
 <template>
     <NuxtLayout>
-        <div class="text-center h-screen w-screen relative">
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2">
-                <h3 class="text-5xl font-bold">フロントエンド</h3>
-                <p class="text-lg my-10">CSSフレームワークやJavaScriptフレームワークなど</p>
-                <NuxtLink to="skills/frontend" class="inline-block mt-10 px-6 py-3 text-lg font-bold border-4 border-double border-white hover:bg-white hover:text-black duration-300">詳細はこちら</NuxtLink>
+        <div class="w-screen">
+            <h3 class="text-5xl font-bold mt-10">フロントエンド</h3>
+            <div>
+                <h4>JS/TS</h4>
+                <div v-for="item in JsTs" :key="item.name">
+                    <img :src="item.imgUrl" :alt="item.name">
+                </div>
             </div>
-            <div id="front-picture" class="">
-                複数画像を画面に点々と表示＋スクロールで移動
-            </div>
-        </div>
-        <hr>
-        <div class="text-center h-screen w-screen relative">
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2">
-                <h3 class="text-5xl font-bold">バックエンド</h3>
-                <p class="text-lg my-10">バックエンド言語のフレームワークなど</p>
-                <NuxtLink to="skills/backend" class="inline-block mt-10 px-6 py-3 text-lg font-bold border-4 border-double border-white hover:bg-white hover:text-black duration-300">詳細はこちら</NuxtLink>
-            </div>
-            <div id="front-picture" class="">
-                複数画像を画面に点々と表示＋スクロールで移動
+            <div>
+                <h4>CSSフレームワーク</h4>
             </div>
         </div>
-        <hr>
-        <div class="text-center h-screen w-screen relative">
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2">
-                <h3 class="text-5xl font-bold">その他</h3>
-                <p class="text-lg my-10">プログラミング言語以外の技術</p>
-                <NuxtLink to="skills/others" class="inline-block mt-10 px-6 py-3 text-lg font-bold border-4 border-double border-white hover:bg-white hover:text-black duration-300">詳細はこちら</NuxtLink>
+        <hr class="w-4/5 mx-auto">
+        <div class="w-screen">  
+            <h3 class="text-5xl font-bold mt-20">バックエンド</h3>
+            <div>
+                <h4>WEB開発フレームワーク</h4>
             </div>
-            <div id="front-picture" class="">
-                複数画像を画面に点々と表示＋スクロールで移動
+            <div>
+                <h4></h4>
             </div>
+        </div>
+        <hr class="w-4/5 mx-auto">
+        <div class="w-screen">
+            <h3 class="text-5xl font-bold mt-20">その他</h3>
+            <p class="text-lg my-10">プログラミング言語以外の技術</p>
         </div>
     </NuxtLayout>
 </template>

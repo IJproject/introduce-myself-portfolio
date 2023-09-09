@@ -1,9 +1,0 @@
-<script setup>
-
-</script>
-
-<template>
-    <NuxtLayout>
-        <div>skills/frontend.vueの記述</div>
-    </NuxtLayout>
-</template>
