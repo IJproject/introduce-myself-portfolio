@@ -1,12 +1,14 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import SkillsBar from '/components/SkillsBar.vue';
+
 const JsTs = ref([
-    { name: 'JavaScript(Vanilla)', level: 50, imgUrl: '/img/javascript.png', workUrl: '' },
-    { name: 'TypeScript', level: 30, imgUrl: '/img/typescript.png', workUrl: 'https://github.com/IJproject/password-generator' },
-    { name: 'Vue3', level: 70, imgUrl: '/img/vue.png', workUrl: 'https://github.com/IJproject/chatgpt_app' },
-    { name: 'Nuxt3', level: 50, imgUrl: '/img/nuxt.png', workUrl: 'https://github.com/IJproject/introduce-myself-portfolio' },
-    { name: 'React', level: 30, imgUrl: '/img/react.png', workUrl: 'https://github.com/IJproject/todolist-react-typescript' },
-    { name: 'Next', level: 10, imgUrl: '/img/next.png', workUrl: '' },
+    { name: 'JavaScript(Vanilla)', level: 50, imgUrl: '/img/logo/javascript.png', workUrl: '' },
+    { name: 'TypeScript', level: 30, imgUrl: '/img/logo/typescript.png', workUrl: 'https://github.com/IJproject/password-generator' },
+    { name: 'Vue3', level: 70, imgUrl: '/img/logo/vue.png', workUrl: 'https://github.com/IJproject/chatgpt_app' },
+    { name: 'Nuxt3', level: 50, imgUrl: '/img/logo/nuxt.png', workUrl: 'https://github.com/IJproject/introduce-myself-portfolio' },
+    { name: 'React', level: 30, imgUrl: '/img/logo/react.png', workUrl: 'https://github.com/IJproject/todolist-react-typescript' },
+    { name: 'Next', level: 10, imgUrl: '/img/logo/next.png', workUrl: '' },
 ])
 
 const JsTsWidth = ref([])
@@ -35,7 +37,6 @@ onMounted(() => {
         }
     }, 10)
 })
-
 </script>
 
 <template>
@@ -75,5 +76,6 @@ onMounted(() => {
             <h3 class="text-5xl font-bold mt-20">その他</h3>
             <p class="text-lg my-10">プログラミング言語以外の技術</p>
         </div>
+        <SkillsBar :languages=JsTs title="- JavaScript/TypeScript -" />
     </NuxtLayout>
 </template>
