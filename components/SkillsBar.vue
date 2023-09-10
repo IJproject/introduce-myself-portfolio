@@ -10,8 +10,7 @@ for (let i = 0; i < props.languages.length; i++) {
 
 onMounted(() => {
     const element = document.querySelector('.progressbar');
-    console.log(element.clientWidth)
-
+    
     let count = 0
     const progress = window.setInterval(() => {
         if (count < 100) {
