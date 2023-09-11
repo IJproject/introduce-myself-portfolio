@@ -2,6 +2,13 @@
 import { ref, onMounted } from 'vue'
 import { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshStandardMaterial, Mesh, DirectionalLight, Color } from 'three'
 
+const section = [
+    {title: 'PROFILE', content: ['WEBエンジニアとしての経歴や趣味などを紹介', 'パブリックからプライベートまでなんでも'], url: 'profile', color: 'yellow'},
+    {title: 'SKILLS', content: ['エンジニアとして保有するスキルの紹介', '仕事依頼の際や、採用の参考にご活用ください'], url: 'skills', color: 'green'},
+    {title: 'WORKS', content: ['これまでの成果物を列挙', '現状では作品がほぼありませんが、、'], url: 'works', color: 'cyan'},
+    {title: 'CONTACT', content: ['仕事の依頼などはこちらのGmailまで', 'その他SNSなども興味あれば'], url: 'contact', color: 'pink'},
+]
+
 let scene, sizes, camera, renderer, geometry, material, mesh, directionalLight
 
 // Three.jsの初期化関数
@@ -14,14 +21,14 @@ const init = () => {
     };
 
     camera = new PerspectiveCamera(50, sizes.width / sizes.height, 0.1, 100);
-    camera.position.set(1.2, -0.3, 3)
+    camera.position.set(-1.2, 0, 3)
     scene.add(camera);
 
     renderer = new WebGLRenderer({ alpha: true })
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(window.devicePixelRatio)
 
-    geometry = new BoxGeometry( 1, 1, 1 ); 
+    geometry = new BoxGeometry( .8, .8, .8 ); 
 
     material = new MeshStandardMaterial();
     material.roughness = 0.7
@@ -91,65 +98,23 @@ onMounted(() => {
 
 <template>
     <NuxtLayout>
-        <div>
-            <div class="h-screen w-full grid grid-cols-2">
-                <div class="col-span-1 h-full relative">
-                    <div class="absolute top-1/4 left-1/2 -translate-x-1/2">
-                        <p class="text-center text-5xl font-bold"><a class="gradient-text">Web Engineer</a></p>
-                        <p class="text-center text-3xl font-bold mt-2 ml-10"><a class="gradient-text">- Junpei Iwata</a></p>
-                        <p class="text-lg mt-8">
-                            自称フルスタックエンジニアの<br>
-                            自己紹介ポートフォリオへようこそ<br>
-                        </p>
-                    </div>
-                </div>
-                <div id="homeGL" class="col-span-1 overflow-hidden"></div>
-            </div>
-            <hr>
-            <div class="my-8 text-center">
-                <div class="grid grid-cols-2">
-                    <div class="col-span-1 order-1 my-auto">
-                        <h3 class="text-5xl font-bold my-4"><span class="text-yellow-400">P</span>ROFILE</h3>
-                        <p class="my-20 text-lg">WEBエンジニアとしての経歴や趣味などを紹介<br>パブリックからプライベートまでなんでも</p>
-                        <NuxtLink to="profile" class="inline-block px-6 py-3 text-lg font-bold border-4 border-double border-white hover:bg-white hover:text-black duration-300">詳細はこちら</NuxtLink>
-                    </div>
-                    <img src="/img/no-image.png" alt="profile photo" class="block col-span-1 order-2 mx-auto my-auto h-3/5" />
+        <div class="md:w-1/2 -mt-20">
+            <div class="h-screen w-full flex justify-center items-center">
+                <div class="">
+                    <p class="text-center text-5xl font-bold"><a class="gradient-text">Web Engineer</a></p>
+                    <p class="text-center text-3xl font-bold mt-2 ml-10"><a class="gradient-text">- Junpei Iwata</a></p>
+                    <p class="text-lg text-slate-300 mt-8">
+                        自称フルスタックエンジニアの<br>
+                        自己紹介ポートフォリオへようこそ<br>
+                    </p>
                 </div>
             </div>
-            <hr>
-            <div class="my-8 text-center">
-                <div class="grid grid-cols-2">
-                    <div class="col-span-1 order-2 my-auto">
-                        <h3 class="text-5xl font-bold my-4"><span class="text-green-400">S</span>KILLS</h3>
-                        <p class="my-20 text-lg">エンジニアとして保有するスキルの紹介<br>仕事依頼の際や、採用の参考にご活用ください</p>
-                        <NuxtLink to="skills" class="inline-block px-6 py-3 text-lg font-bold border-4 border-double border-white hover:bg-white hover:text-black duration-300">詳細はこちら</NuxtLink>
-                    </div>
-                    <img src="/img/no-image.png" alt="profile photo" class="block col-span-1 order-1 mx-auto my-auto h-3/5" />
-                </div>
-            </div>
-            <hr>
-            <div class="my-8 text-center">
-                <div class="grid grid-cols-2">
-                    <div class="col-span-1 order-1 my-auto">
-                        <h3 class="text-5xl font-bold my-4"><span class="text-cyan-400">W</span>ORKS</h3>
-                        <p class="my-20 text-lg">これまでの成果物を列挙<br>現状では作品がほぼありませんが、、</p>
-                        <NuxtLink to="works" class="inline-block px-6 py-3 text-lg font-bold border-4 border-double border-white hover:bg-white hover:text-black duration-300">詳細はこちら</NuxtLink>
-                    </div>
-                    <img src="/img/no-image.png" alt="profile photo" class="block col-span-1 order-2 mx-auto my-auto h-3/5" />
-                </div>
-            </div>
-            <hr>
-            <div class="my-8 text-center">
-                <div class="grid grid-cols-2">
-                    <div class="col-span-1 order-2 my-auto">
-                        <h3 class="text-5xl font-bold my-4"><span class="text-pink-400">C</span>ONTACT</h3>
-                        <p class="my-20 text-lg">仕事の依頼などはこちらのGmailまで<br>その他SNSなども興味あれば</p>
-                        <NuxtLink to="contact" class="inline-block px-6 py-3 text-lg font-bold border-4 border-double border-white hover:bg-white hover:text-black duration-300">詳細はこちら</NuxtLink>
-                    </div>
-                    <img src="/img/no-image.png" alt="profile photo" class="block col-span-1 order-1 mx-auto my-auto h-3/5" />
-                </div>
-            </div>
+            <Section :section=section[0] />
+            <Section :section=section[1] />
+            <Section :section=section[2] />
+            <Section :section=section[3] />  
         </div>
+        <div id="homeGL" class="fixed top-0 left-0 pointer-events-none"></div>
     </NuxtLayout>
 </template>
 

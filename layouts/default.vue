@@ -40,7 +40,7 @@ const mobileMenuOpen = ref(false)
         </div>
     </header>
 
-    <main class="px-8 pt-24 w-screen overflow-hidden">
+    <main class="px-8 pt-24 w-screen min-h-screen overflow-hidden">
         <slot />
     </main>
     

@@ -29,6 +29,7 @@ const purelanguages = [
 const supportTool = [
     { name: 'Git/GitHub', level: 70, imgUrl: '/img/logo/git.png', workUrl: '' },
     { name: 'AWS', level: 10, imgUrl: '/img/logo/aws.png', workUrl: '' },
+    { name: 'MySQL', level: 40, imgUrl: '/img/logo/mysql.png', workUrl: '' },
     { name: 'Docker', level: 5, imgUrl: '/img/logo/docker.png', workUrl: '' },
 ]
 
