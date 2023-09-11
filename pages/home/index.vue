@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import Section from '/components/Section.vue'
 import { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshStandardMaterial, Mesh, DirectionalLight, Color } from 'three'
 
 const section = [
