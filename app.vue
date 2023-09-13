@@ -12,3 +12,9 @@ useHead({
         <NuxtPage />
     </div>
 </template>
+
+<style>
+    .title {
+        font-family: 'Abril Fatface';
+    }
+</style>

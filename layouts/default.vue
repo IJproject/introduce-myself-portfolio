@@ -43,9 +43,11 @@ const mobileMenuOpen = ref(false)
     <main class="px-8 pt-24 w-screen min-h-screen overflow-hidden">
         <slot />
     </main>
+
+    <hr class="mx-8">
     
-    <footer class="px-16 py-12 bg-white text-black">
-        hjbjhbcjbdjbsjcヴァd
+    <footer class="px-16 py-12">
+        ここはフッターです。
     </footer>
 </template>
 

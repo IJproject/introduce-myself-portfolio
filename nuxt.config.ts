@@ -4,8 +4,15 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/tailwindcss',
         'nuxt-headlessui',
+        '@nuxtjs/google-fonts',
     ],
     headlessui: {
         prefix: 'Headless'
     },
+    googleFonts: {
+        families: {
+            'Abril+Fatface': true,
+        },
+    },
+    
 })

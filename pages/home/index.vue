@@ -1,7 +1,7 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import Section from '/components/Section.vue'
-import { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshStandardMaterial, Mesh, DirectionalLight, Color } from 'three'
+import { ref, onMounted } from 'vue';
+import HomeSection from '/components/HomeSection.vue';
+import { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshStandardMaterial, Mesh, DirectionalLight, Color } from 'three';
 
 const section = [
     {title: 'PROFILE', content: ['WEBエンジニアとしての経歴や趣味などを紹介', 'パブリックからプライベートまでなんでも'], url: 'profile', color: 'yellow'},
@@ -102,24 +102,24 @@ onMounted(() => {
         <div class="md:w-1/2 -mt-20">
             <div class="h-screen w-full flex justify-center items-center">
                 <div class="">
-                    <p class="text-center text-5xl font-bold"><a class="gradient-text">Web Engineer</a></p>
-                    <p class="text-center text-3xl font-bold mt-2 ml-10"><a class="gradient-text">- Junpei Iwata</a></p>
+                    <p class="text-center text-5xl font-bold title"><a class="gradient-text">Web Engineer</a></p>
+                    <p class="text-center text-3xl font-bold mt-2 ml-10 title"><a class="gradient-text">- Junpei Iwata</a></p>
                     <p class="text-lg text-slate-300 mt-8">
                         自称フルスタックエンジニアの<br>
                         自己紹介ポートフォリオへようこそ<br>
                     </p>
                 </div>
             </div>
-            <Section :section=section[0] />
-            <Section :section=section[1] />
-            <Section :section=section[2] />
-            <Section :section=section[3] />  
+            <HomeSection :section=section[0] />
+            <HomeSection :section=section[1] />
+            <HomeSection :section=section[2] />
+            <HomeSection :section=section[3] />  
         </div>
         <div id="homeGL" class="fixed top-0 left-0 pointer-events-none"></div>
     </NuxtLayout>
 </template>
 
-<style scoped>
+<style>
 .gradient-text {
     background: linear-gradient(45deg, var(--text-color, black), white);
     -webkit-background-clip: text;
