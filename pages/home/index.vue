@@ -10,7 +10,7 @@ const section = [
     {title: 'CONTACT', content: ['仕事の依頼などはこちらのGmailまで', 'その他SNSなども興味あれば'], url: 'contact', color: 'pink'},
 ]
 
-let scene, sizes, camera, renderer, geometry, material, mesh, directionalLight
+let scene, sizes, camera, renderer, geometry, material, mesh, directionalLight, controls
 
 // Three.jsの初期化関数
 const init = () => {
@@ -45,11 +45,46 @@ const init = () => {
     directionalLight.position.set(0, 4, 8)
     scene.add(directionalLight)
 
+    let moveX = 0
+    let moveY = 0
+
+    let startX = 0
+    let startY = 0
+
+    let currentX = 0
+    let currentY = 0
+
+    // パソコン用
+    window.addEventListener('wheel', (event) => {
+        moveX = event.deltaX
+        moveY = event.deltaY
+    })
+
+    // スマホ用
+    window.addEventListener('touchstart', function(event) {
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+    });
+
+    window.addEventListener('touchmove', function(event) {
+        if (startY !== 0) {
+            currentX = event.touches[0].clientX;
+            currentY = event.touches[0].clientY;
+
+            moveX = startX - currentX;
+            moveY = startY - currentY;
+
+            startY = currentY;
+        }
+});
+
     rot();
 
     function rot() {
         mesh.rotation.x += 0.007
+        mesh.rotation.x -= moveY / 500
         mesh.rotation.y += 0.005
+        mesh.rotation.y -= moveX / 500
         mesh.rotation.z += 0.003
 
         const xColor = Math.sin(mesh.rotation.x);
@@ -68,8 +103,13 @@ const init = () => {
         document.documentElement.style.setProperty('--text-color', rgbColor(xColor, yColor, zColor));
 
         renderer.render(scene, camera);
-
         window.requestAnimationFrame(rot);
+
+        moveX = 0;
+        moveY = 0;
+
+        startX = currentX;
+        startY = currentY;
     }
 }
 
