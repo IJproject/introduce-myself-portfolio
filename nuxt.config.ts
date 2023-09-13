@@ -14,5 +14,15 @@ export default defineNuxtConfig({
             'Abril+Fatface': true,
         },
     },
+    tailwindcss: {
+        config: {
+            variants: {
+                extend: {
+                    backgroundColor: ['hover'],
+                    textColor: ['hover'],
+                },
+              },
+        }
+    }
     
 })

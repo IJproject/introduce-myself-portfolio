@@ -161,10 +161,14 @@ onMounted(() => {
 
 <style>
 .gradient-text {
-    background: linear-gradient(45deg, var(--text-color, black), white);
+    background: linear-gradient(45deg, white, var(--text-color, black));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+}
+
+.test:hover {
+    background-color: var(--text-color); 
 }
 </style>
 
