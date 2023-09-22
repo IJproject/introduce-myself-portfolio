@@ -23,7 +23,6 @@ const mobileMenuOpen = ref(false)
                 <NuxtLink to="/profile">PROFILE</NuxtLink>
                 <NuxtLink to="/skills">SKILLS</NuxtLink>
                 <NuxtLink to="/works">WORKS</NuxtLink>
-                <NuxtLink to="/blog">BLOG</NuxtLink>
                 <NuxtLink to="/contact">CONTACT</NuxtLink>
             </div>
         </nav>
@@ -34,20 +33,13 @@ const mobileMenuOpen = ref(false)
             <hr class="text-center mx-6"> 
             <NuxtLink to="/works" class="block text-center py-8">WORKS</NuxtLink>
             <hr class="text-center mx-6"> 
-            <NuxtLink to="/blog" class="block text-center py-8">BLOG</NuxtLink>
-            <hr class="text-center mx-6"> 
             <NuxtLink to="/contact" class="block text-center py-8">CONTACT</NuxtLink>
         </div>
     </header>
 
-    <main class="px-8 pt-24 w-screen min-h-screen overflow-hidden">
+    <main class="px-8 pt-24 pb-20 w-screen min-h-screen overflow-hidden">
         <slot />
     </main>
 
-    <hr class="mx-8">
-    
-    <footer class="px-16 py-12">
-        ここはフッターです。
-    </footer>
 </template>
 

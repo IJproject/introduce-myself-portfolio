@@ -42,19 +42,19 @@ const others = [
 <template>
     <NuxtLayout>
         <div class="w-full">
-            <h3 class="text-5xl text-center font-bold my-10">フロントエンド</h3>
+            <h3 class="text-5xl font-bold my-10">フロントエンド</h3>
             <SkillsBar :languages=JsTs title="- JavaScript/TypeScript -" />
             <SkillsBar :languages=Css title="- CSSフレームワーク -" />
         </div>
         <hr>
         <div class="w-full">  
-            <h3 class="text-5xl text-center font-bold my-10">バックエンド</h3>
+            <h3 class="text-5xl font-bold mt-20 mb-10">バックエンド</h3>
             <SkillsBar :languages=backendFramework title="- WEB開発フレームワーク -" />
             <SkillsBar :languages=purelanguages title="- 純度100％ -" />
         </div>
         <hr>
         <div class="w-full">
-            <h3 class="text-5xl text-center font-bold my-10">その他</h3>
+            <h3 class="text-5xl font-bold mt-20 mb-10">その他</h3>
             <SkillsBar :languages=supportTool title="- 開発関連 -" />
             <SkillsBar :languages=others title="- その他 -" />
         </div>

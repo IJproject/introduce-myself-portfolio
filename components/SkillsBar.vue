@@ -26,8 +26,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
-        <h4 class="text-3xl">{{ title }}</h4>
+    <div class="my-20 px-2">
+        <h4 class="text-3xl font-semibold">{{ title }}</h4>
         <div v-for="(item, index) in props.languages" :key="item.name" class="my-6 mx-2">
             <h5 class="py-1 font-semibold">{{ item.name }}</h5>
             <div class="flex justify-start">

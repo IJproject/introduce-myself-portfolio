@@ -166,10 +166,6 @@ onMounted(() => {
     background-clip: text;
     color: transparent;
 }
-
-.test:hover {
-    background-color: var(--text-color); 
-}
 </style>
 
 

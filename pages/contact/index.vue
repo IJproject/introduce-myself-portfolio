@@ -9,9 +9,10 @@ const medias = ref([
 <template>
     <NuxtLayout>
         <div class="w-full">
-            <div>
+            <!-- ここはメールに -->
+            <!-- <div>
                 メール
-            </div>
+            </div> -->
             <div>
                 <h3 class="text-5xl text-center font-bold my-10">SNS</h3>
                 <div class="flex justify-start flex-wrap">
